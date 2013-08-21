@@ -222,9 +222,8 @@ class Message
 
         $res = new static();
         foreach ($parts as $part) {
-
             // now we build a new MimePart for the current Message Part:
-            $properties = array();
+            $newPart = new Part($part['body']);
             foreach ($part['header'] as $header) {
                 /** @var \Zend\Mail\Header\HeaderInterface $header */
                 /**
@@ -235,47 +234,29 @@ class Message
                 $fieldValue = $header->getFieldValue();
                 switch (strtolower($fieldName)) {
                     case 'content-type':
-                        $properties['type'] = $fieldValue;
+                        $newPart->type = $fieldValue;
                         break;
                     case 'content-transfer-encoding':
-                        $properties['encoding'] = $fieldValue;
+                        $newPart->encoding = $fieldValue;
                         break;
                     case 'content-id':
-                        $properties['id'] = trim($fieldValue,'<>');
+                        $newPart->id = trim($fieldValue,'<>');
                         break;
                     case 'content-disposition':
-                        $properties['disposition'] = $fieldValue;
+                        $newPart->disposition = $fieldValue;
                         break;
                     case 'content-description':
-                        $properties['description'] = $fieldValue;
+                        $newPart->description = $fieldValue;
                         break;
                     case 'content-location':
-                        $properties['location'] = $fieldValue;
+                        $newPart->location = $fieldValue;
                         break;
                     case 'content-language':
-                        $properties['language'] = $fieldValue;
+                        $newPart->language = $fieldValue;
                         break;
                     default:
                         throw new Exception\RuntimeException('Unknown header ignored for MimePart:' . $fieldName);
                 }
-            }
-
-            $body = $part['body'];
-
-            if (isset($properties['encoding'])) {
-                switch ($properties['encoding']) {
-                    case 'quoted-printable':
-                        $body = quoted_printable_decode($body);
-                        break;
-                    case 'base64':
-                        $body = base64_decode($body);
-                        break;
-                }
-            }
-
-            $newPart = new Part($body);
-            foreach ($properties as $key => $value) {
-                $newPart->$key = $value;
             }
             $res->addPart($newPart);
         }
