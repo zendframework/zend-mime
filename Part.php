@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -26,7 +26,6 @@ class Part
     public $language;
     protected $content;
     protected $isStream = false;
-    protected $filters = array();
 
 
     /**
@@ -68,7 +67,7 @@ class Part
      * reading the content. very useful for large file attachments.
      *
      * @param string $EOL
-     * @return resource
+     * @return stream
      * @throws Exception\RuntimeException if not a stream or unable to append filter
      */
     public function getEncodedStream($EOL = Mime::LINEEND)
@@ -80,9 +79,6 @@ class Part
         //stream_filter_remove(); // ??? is that right?
         switch ($this->encoding) {
             case Mime::ENCODING_QUOTEDPRINTABLE:
-                if (array_key_exists(Mime::ENCODING_QUOTEDPRINTABLE, $this->filters)) {
-                    stream_filter_remove($this->filters[Mime::ENCODING_QUOTEDPRINTABLE]);
-                }
                 $filter = stream_filter_append(
                     $this->content,
                     'convert.quoted-printable-encode',
@@ -92,15 +88,11 @@ class Part
                         'line-break-chars' => $EOL
                     )
                 );
-                $this->filters[Mime::ENCODING_QUOTEDPRINTABLE] = $filter;
                 if (!is_resource($filter)) {
                     throw new Exception\RuntimeException('Failed to append quoted-printable filter');
                 }
                 break;
             case Mime::ENCODING_BASE64:
-                if (array_key_exists(Mime::ENCODING_BASE64,$this->filters)) {
-                    stream_filter_remove($this->filters[Mime::ENCODING_BASE64]);
-                }
                 $filter = stream_filter_append(
                     $this->content,
                     'convert.base64-encode',
@@ -110,7 +102,6 @@ class Part
                         'line-break-chars' => $EOL
                     )
                 );
-                $this->filters[Mime::ENCODING_BASE64] = $filter;
                 if (!is_resource($filter)) {
                     throw new Exception\RuntimeException('Failed to append base64 filter');
                 }
@@ -129,10 +120,7 @@ class Part
     public function getContent($EOL = Mime::LINEEND)
     {
         if ($this->isStream) {
-            $encodedStream = $this->getEncodedStream($EOL);
-            $encodedStreamContents = stream_get_contents($encodedStream);
-            rewind($encodedStream);
-            return $encodedStreamContents;
+            return stream_get_contents($this->getEncodedStream($EOL));
         }
         return Mime::encode($this->content, $this->encoding, $EOL);
     }
