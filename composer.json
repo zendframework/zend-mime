@@ -25,6 +25,8 @@
     "suggest": {
         "zendframework/zend-mail": "Zend\\Mail component"
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "extra": {
         "branch-alias": {
             "dev-master": "2.4-dev",
