@@ -134,4 +134,76 @@ EOD;
 
         $this->assertEquals('', $mimeMessage->generateMessage());
     }
+
+    public static function dataTestDecodeSplitMessage()
+    {
+        $headerpart = <<<EOD
+To: foo@example.com
+Subject: bar
+Date: Sun, 01 Jan 2000 00:00:00 +0000
+From: baz@example.com
+Content-Type: text/plain
+Message-ID: <aaaaa@mail.example.com>
+EOD;
+
+        $bodypart = <<<EOD
+This is
+the body
+EOD;
+        return array(array($headerpart, $bodypart));
+    }
+
+    /**
+     * @dataProvider dataTestDecodeSplitMessage
+     */
+    public function testDecodeSplitMessage_lf($headerpart, $bodypart)
+    {
+        // Decode::splitMessage normal usage
+        $headers = null;
+        $body = null;
+        Mime\Decode::splitMessage($headerpart."\n\n".$bodypart, $headers, $body);
+        $this->assertInstanceOf('Zend\\Mail\\Headers', $headers);
+        //$headers->toString() is using CRLF, so we can't do assertEquals
+        $this->assertInternalType('string', $body);
+        $this->assertEquals($bodypart, $body);
+    }
+
+    /**
+     * @dataProvider dataTestDecodeSplitMessage
+     */
+    public function testDecodeSplitMessage_mixed($headerpart, $bodypart)
+    {
+        // Decode::splitMessage support mixed EOL
+        $headers = null;
+        $body = null;
+        Mime\Decode::splitMessage($headerpart."\r\n\n".$bodypart, $headers, $body);
+        $this->assertInstanceOf('Zend\Mail\Headers', $headers);
+        $this->assertInternalType('string', $body);
+        $this->assertEquals($bodypart, $body);
+    }
+
+    /**
+     * @dataProvider dataTestDecodeSplitMessage
+     */
+    public function testDecodeSplitMessage_drop($headerpart, $bodypart)
+    {
+        // Decode::splitMessage drop first line (zf2-372)
+        // postfix sometimes add an invalid header on first line
+        $headers = null;
+        $body = null;
+        Mime\Decode::splitMessage("From foo@example.com  Sun Jan 01 00:00:00 2000\n".$headerpart."\n\n".$bodypart, $headers, $body);
+        $this->assertInstanceOf('Zend\Mail\Headers', $headers);
+        $this->assertInternalType('string', $body);
+        $this->assertEquals($bodypart, $body);
+    }
+
+    /**
+     * @dataProvider dataTestDecodeSplitMessage
+     */
+    public function testDecodeSplitMessage_bad($headerpart, $bodypart)
+    {
+        //only one EOL -> "This is" isn't an header
+        $this->setExpectedException('Zend\Mail\Exception\RuntimeException');
+        Mime\Decode::splitMessage($headerpart."\n".$bodypart, $headers, $body);
+    }
 }
