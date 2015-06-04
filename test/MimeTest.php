@@ -131,6 +131,27 @@ class MimeTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+     * base64 chunk are 4 chars long
+     * try to encode/decode with 4 line length
+     * @dataProvider dataTestEncodeMailHeaderBase64wrap
+     */
+    public function testEncodeMailHeaderBase64wrap($str)
+    {
+        $this->assertEquals($str, Mime\Decode::decodeQuotedPrintable(Mime\Mime::encodeBase64Header($str, "UTF-8", 20)));
+        $this->assertEquals($str, Mime\Decode::decodeQuotedPrintable(Mime\Mime::encodeBase64Header($str, "UTF-8", 21)));
+        $this->assertEquals($str, Mime\Decode::decodeQuotedPrintable(Mime\Mime::encodeBase64Header($str, "UTF-8", 22)));
+        $this->assertEquals($str, Mime\Decode::decodeQuotedPrintable(Mime\Mime::encodeBase64Header($str, "UTF-8", 23)));
+    }
+
+    public static function dataTestEncodeMailHeaderBase64wrap()
+    {
+        return array(
+            array("äöüäöüäöüäöüäöüäöüäöü"),
+            array("Alle meine Entchen schwimmen in dem See, schwimmen in dem See, Köpfchen in das Wasser, Schwänzchen in die Höh!")
+        );
+    }
+
     public function testFromMessageMultiPart()
     {
         $message = Mime\Message::createFromMessage(
