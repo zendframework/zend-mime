@@ -75,6 +75,16 @@ class MimeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(quoted_printable_decode($qp), $text);
     }
 
+    public function testQuotedPrintableNoDotAtBeginningOfLine()
+    {
+        $text = str_repeat('a', Mime\Mime::LINELENGTH) . '.bbb';
+        $qp = Mime\Mime::encodeQuotedPrintable($text);
+
+        $expected = str_repeat('a', Mime\Mime::LINELENGTH - 1) . "=\na.bbb";
+
+        $this->assertEquals($expected, $qp);
+    }
+
     public function testBase64()
     {
         $content = str_repeat("\x88\xAA\xAF\xBF\x29\x88\xAA\xAF\xBF\x29\x88\xAA\xAF", 4);
