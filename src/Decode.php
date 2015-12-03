@@ -128,9 +128,11 @@ class Decode
         // next is the standard new line
         } elseif ($EOL != "\r\n" && strpos($message, "\r\n\r\n")) {
             list($headers, $body) = explode("\r\n\r\n", $message, 2);
+            $EOL = "\r\n";
         // next is the other "standard" new line
         } elseif ($EOL != "\n" && strpos($message, "\n\n")) {
             list($headers, $body) = explode("\n\n", $message, 2);
+            $EOL = "\n";
         // at last resort find anything that looks like a new line
         } else {
             ErrorHandler::start(E_NOTICE|E_WARNING);
