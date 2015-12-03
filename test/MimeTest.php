@@ -207,4 +207,23 @@ n in das Wasser, Schw=C3=A4nzchen in die H=C3=B6h!'],
             }
         }
     }
+
+    public function dataTestCharsetDetection()
+    {
+        return [
+            ["ASCII", "test"],
+            ["ASCII", "=?ASCII?Q?test?="],
+            ["UTF-8", "=?UTF-8?Q?test?="],
+            ["ISO-8859-1", "=?ISO-8859-1?Q?Pr=FCfung_f=FCr?= Entwerfen von einer MIME kopfzeile"],
+            ["UTF-8", "=?UTF-8?Q?Pr=C3=BCfung=20Pr=C3=BCfung?="]
+        ];
+    }
+
+    /**
+     * @dataProvider dataTestCharsetDetection
+     */
+    public function testCharsetDetection($expected, $string)
+    {
+        $this->assertEquals($expected, Mime\Mime::mimeDetectCharset($string));
+    }
 }

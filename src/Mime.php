@@ -347,4 +347,20 @@ class Mime
     {
         return $EOL . '--' . $this->boundary . '--' . $EOL;
     }
+
+    /**
+     * Detect MIME charset
+     *
+     * @param string $str
+     * @return string
+     */
+    public static function mimeDetectCharset($str)
+    {
+        $pattern = '#=\?(?P<charset>[\x21\x23-\x26\x2a\x2b\x2d\x5e\5f\60\x7b-\x7ea-zA-Z0-9]+)\?(?P<encoding>[\x21\x23-\x26\x2a\x2b\x2d\x5e\5f\60\x7b-\x7ea-zA-Z0-9]+)\?(?P<text>[\x21-\x3e\x40-\x7e]+)#';
+        if (preg_match($pattern, $str, $matches)) {
+            return strtoupper($matches['charset']);
+        } else {
+            return 'ASCII';
+        }
+    }
 }
