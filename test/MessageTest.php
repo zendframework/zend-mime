@@ -112,6 +112,41 @@ EOD;
         $this->assertEquals('12', $part2->id);
     }
 
+    /**
+     * check if decoding a string into a \Zend\Mime\Message object works
+     *
+     */
+    public function testDecodeMimeMessageNoHeader()
+    {
+        $text = <<<EOD
+This is a MIME-encapsulated message
+
+--=_af4357ef34b786aae1491b0a2d14399f
+
+The original message was received at Fri, 16 Aug 2013 00:00:48 -0700
+from localhost.localdomain [127.0.0.1]
+End content
+
+--=_af4357ef34b786aae1491b0a2d14399f
+Content-Type: image/gif
+
+This is a test
+--=_af4357ef34b786aae1491b0a2d14399f--
+EOD;
+        $res = Mime\Message::createFromMessage($text, '=_af4357ef34b786aae1491b0a2d14399f');
+
+        $parts = $res->getParts();
+        $this->assertEquals(2, count($parts));
+
+        $part1 = $parts[0];
+        $part1Content = $part1->getRawContent();
+        $this->assertContains('The original message', $part1Content);
+        $this->assertContains('End content', $part1Content);
+
+        $part2 = $parts[1];
+        $this->assertEquals('image/gif', $part2->type);
+    }
+
     public function testNonMultipartMessageShouldNotRemovePartFromMessage()
     {
         $message = new Mime\Message();  // No Parts
