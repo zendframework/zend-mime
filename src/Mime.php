@@ -14,20 +14,23 @@ namespace Zend\Mime;
  */
 class Mime
 {
-    const TYPE_OCTETSTREAM = 'application/octet-stream';
-    const TYPE_TEXT = 'text/plain';
-    const TYPE_HTML = 'text/html';
-    const ENCODING_7BIT = '7bit';
-    const ENCODING_8BIT = '8bit';
+    // @codingStandardsIgnoreStart
+    const TYPE_OCTETSTREAM         = 'application/octet-stream';
+    const TYPE_TEXT                = 'text/plain';
+    const TYPE_HTML                = 'text/html';
+    const ENCODING_7BIT            = '7bit';
+    const ENCODING_8BIT            = '8bit';
     const ENCODING_QUOTEDPRINTABLE = 'quoted-printable';
-    const ENCODING_BASE64 = 'base64';
-    const DISPOSITION_ATTACHMENT = 'attachment';
-    const DISPOSITION_INLINE = 'inline';
-    const LINELENGTH = 72;
-    const LINEEND = "\n";
-    const MULTIPART_ALTERNATIVE = 'multipart/alternative';
-    const MULTIPART_MIXED = 'multipart/mixed';
-    const MULTIPART_RELATED = 'multipart/related';
+    const ENCODING_BASE64          = 'base64';
+    const DISPOSITION_ATTACHMENT   = 'attachment';
+    const DISPOSITION_INLINE       = 'inline';
+    const LINELENGTH               = 72;
+    const LINEEND                  = "\n";
+    const MULTIPART_ALTERNATIVE    = 'multipart/alternative';
+    const MULTIPART_MIXED          = 'multipart/mixed';
+    const MULTIPART_RELATED        = 'multipart/related';
+    const CHARSET_REGEX            = '#=\?(?P<charset>[\x21\x23-\x26\x2a\x2b\x2d\x5e\5f\60\x7b-\x7ea-zA-Z0-9]+)\?(?P<encoding>[\x21\x23-\x26\x2a\x2b\x2d\x5e\5f\60\x7b-\x7ea-zA-Z0-9]+)\?(?P<text>[\x21-\x3e\x40-\x7e]+)#';
+    // @codingStandardsIgnoreEnd
 
     protected $boundary;
     protected static $makeUnique = 0;
@@ -106,10 +109,11 @@ class Mime
      * @param string $lineEnd Defaults to {@link LINEEND}
      * @return string
      */
-    public static function encodeQuotedPrintable($str,
+    public static function encodeQuotedPrintable(
+        $str,
         $lineLength = self::LINELENGTH,
-        $lineEnd = self::LINEEND)
-    {
+        $lineEnd = self::LINEEND
+    ) {
         $out = '';
         $str = self::_encodeQuotedPrintable($str);
 
@@ -173,10 +177,12 @@ class Mime
      * @param string $lineEnd Defaults to {@link LINEEND}
      * @return string
      */
-    public static function encodeQuotedPrintableHeader($str, $charset,
+    public static function encodeQuotedPrintableHeader(
+        $str,
+        $charset,
         $lineLength = self::LINELENGTH,
-        $lineEnd = self::LINEEND)
-    {
+        $lineEnd = self::LINEEND
+    ) {
         // Reduce line-length by the length of the required delimiter, charsets and encoding
         $prefix = sprintf('=?%s?Q?', $charset);
         $lineLength = $lineLength-strlen($prefix)-3;
@@ -247,11 +253,12 @@ class Mime
      * @param string $lineEnd Defaults to {@link LINEEND}
      * @return string
      */
-    public static function encodeBase64Header($str,
+    public static function encodeBase64Header(
+        $str,
         $charset,
         $lineLength = self::LINELENGTH,
-        $lineEnd = self::LINEEND)
-    {
+        $lineEnd = self::LINEEND
+    ) {
         $prefix = '=?' . $charset . '?B?';
         $suffix = '?=';
         $remainingLength = $lineLength - strlen($prefix) - strlen($suffix);
@@ -271,10 +278,11 @@ class Mime
      * @param string $lineEnd Defaults to {@link LINEEND}
      * @return string
      */
-    public static function encodeBase64($str,
+    public static function encodeBase64(
+        $str,
         $lineLength = self::LINELENGTH,
-        $lineEnd = self::LINEEND)
-    {
+        $lineEnd = self::LINEEND
+    ) {
         $lineLength = $lineLength - ($lineLength % 4);
         return rtrim(chunk_split(base64_encode($str), $lineLength, $lineEnd));
     }
@@ -358,17 +366,17 @@ class Mime
     /**
      * Detect MIME charset
      *
+     * Extract parts according to https://tools.ietf.org/html/rfc2047#section-2
+     *
      * @param string $str
      * @return string
      */
     public static function mimeDetectCharset($str)
     {
-        // Extract parts according to https://tools.ietf.org/html/rfc2047#section-2
-        $pattern = '#=\?(?P<charset>[\x21\x23-\x26\x2a\x2b\x2d\x5e\5f\60\x7b-\x7ea-zA-Z0-9]+)\?(?P<encoding>[\x21\x23-\x26\x2a\x2b\x2d\x5e\5f\60\x7b-\x7ea-zA-Z0-9]+)\?(?P<text>[\x21-\x3e\x40-\x7e]+)#';
-        if (preg_match($pattern, $str, $matches)) {
+        if (preg_match(self::CHARSET_REGEX, $str, $matches)) {
             return strtoupper($matches['charset']);
-        } else {
-            return 'ASCII';
         }
+
+        return 'ASCII';
     }
 }
