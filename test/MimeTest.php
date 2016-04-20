@@ -156,10 +156,10 @@ class MimeTest extends \PHPUnit_Framework_TestCase
 
     public static function dataTestEncodeMailHeaderBase64wrap()
     {
-        return array(
-            array("äöüäöüäöüäöüäöüäöüäöü"),
-            array("Alle meine Entchen schwimmen in dem See, schwimmen in dem See, Köpfchen in das Wasser, Schwänzchen in die Höh!")
-        );
+        return [
+            ["äöüäöüäöüäöüäöüäöüäöü"],
+            ["Alle meine Entchen schwimmen in dem See, schwimmen in dem See, Köpfchen in das Wasser, Schwänzchen in die Höh!"]
+        ];
     }
 
     public function testFromMessageMultiPart()
