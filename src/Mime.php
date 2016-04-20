@@ -131,6 +131,12 @@ class Mime
                 --$ptr;
             }
 
+            // Try to prevent that the first character of a line is a dot
+            // Outlook Bug: http://engineering.como.com/ghost-vs-outlook/
+            while ($ptr > 1 && $ptr < strlen($str) && $str[$ptr] === '.') {
+                --$ptr;
+            }
+
             // Add string and continue
             $out .= substr($str, 0, $ptr) . '=' . $lineEnd;
             $str = substr($str, $ptr);
