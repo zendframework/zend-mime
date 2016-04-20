@@ -25,3 +25,5 @@ All notable changes to this project will be documented in this file, in reverse 
   `Mime::encodeQuotedPrintable()` to ensure it never creates a header line
   consisting of only a dot (concatenation character), a situation that can break
   parsing by Outlook.
+- [#7](https://github.com/zendframework/zend-mime/pull/7) provides a patch that
+  allows parsing MIME parts that have no headers.

@@ -105,7 +105,8 @@ class Decode
             $message = $message->toString();
         }
         // check for valid header at first line
-        $firstline = strtok($message, "\n");
+        $firstlinePos = strpos($message, "\n");
+        $firstline = $firstlinePos === false ? $message : substr($message, 0, $firstlinePos);
         if (!preg_match('%^[^\s]+[^:]*:%', $firstline)) {
             $headers = [];
             // TODO: we're ignoring \r for now - is this function fast enough and is it safe to assume noone needs \r?
