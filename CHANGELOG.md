@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 2.6.0 - TBD
+
+### Added
+
+- [#6](https://github.com/zendframework/zend-mime/pull/6) adds
+  `Mime::mimeDetectCharset()`, which can be used to detect the charset
+  of a given string (usually a header) according to the rules specified in
+  RFC-2047.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
+
 ## 2.5.2 - TBD
 
 ### Added
