@@ -1,8 +1,0 @@
-{
-    "title": "Zend\\Mime",
-    "target": "html/",
-    "content": [
-        "book/zend.mime.message.md",
-        "book/zend.mime.part.md"
-    ]
-}

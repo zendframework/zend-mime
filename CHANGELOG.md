@@ -2,11 +2,14 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 2.5.2 - TBD
+## 2.5.2 - 2016-04-20
 
 ### Added
 
-- Nothing.
+- [#8](https://github.com/zendframework/zend-mime/pull/8) and
+  [#11](https://github.com/zendframework/zend-mime/pull/11) port documentation
+  from the zf-documentation repo, and publish it to
+  https://zendframework.github.io/zend-mime/
 
 ### Deprecated
 
