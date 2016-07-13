@@ -265,10 +265,10 @@ class Part
     public function setContent($content)
     {
         if (! is_string($content) && ! is_resource($content)) {
-            throw new Exception\InvalidArgumentException(
+            throw new Exception\InvalidArgumentException(sprintf(
                 "'%s' must be string or resource",
                 $content
-            );
+            ));
         }
         $this->content = $content;
         if (is_resource($content)) {
