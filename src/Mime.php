@@ -207,9 +207,16 @@ class Mime
             if ($token === '=20') {
                 // only if we have a single char token or space, we can append the
                 // tempstring it to the current line or start a new line if necessary.
-                if (strlen($lines[$currentLine] . $tmp) > $lineLength) {
+                $lineLimitReached = (strlen($lines[$currentLine] . $tmp) > $lineLength);
+                $noCurrentLine = ($lines[$currentLine] === '');
+                if ($noCurrentLine && $lineLimitReached) {
+                    $lines[$currentLine] = $tmp;
+                    $lines[$currentLine + 1] = '';
+                }
+                elseif ($lineLimitReached) {
                     $lines[$currentLine + 1] = $tmp;
-                } else {
+                }
+                else {
                     $lines[$currentLine] .= $tmp;
                 }
                 $tmp = '';
