@@ -212,11 +212,9 @@ class Mime
                 if ($noCurrentLine && $lineLimitReached) {
                     $lines[$currentLine] = $tmp;
                     $lines[$currentLine + 1] = '';
-                }
-                elseif ($lineLimitReached) {
+                } elseif ($lineLimitReached) {
                     $lines[$currentLine + 1] = $tmp;
-                }
-                else {
+                } else {
                     $lines[$currentLine] .= $tmp;
                 }
                 $tmp = '';
