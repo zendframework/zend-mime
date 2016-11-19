@@ -176,8 +176,10 @@ class Message
      * @throws Exception\RuntimeException
      * @return array
      */
+    // @codingStandardsIgnoreStart
     protected static function _disassembleMime($body, $boundary)
     {
+        // @codingStandardsIgnoreEnd
         $start  = 0;
         $res    = [];
         // find every mime part limiter and cut out the
