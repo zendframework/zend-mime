@@ -147,6 +147,27 @@ EOD;
         $this->assertEquals('image/gif', $part2->type);
     }
 
+    /**
+     * Check if decoding a string that is not a multipart message works
+     */
+    public function testDecodeNonMultipartMimeMessage()
+    {
+        $text = <<<EOD
+Content-Type: image/gif
+
+This is a test
+EOD;
+        $res = Mime\Message::createFromMessage($text);
+
+        $parts = $res->getParts();
+        $this->assertEquals(1, count($parts));
+
+        $part1 = $parts[0];
+        $part1Content = $part1->getRawContent();
+        $this->assertEquals('This is a test', $part1Content);
+        $this->assertEquals('image/gif', $part1->type);
+    }
+
     public function testNonMultipartMessageShouldNotRemovePartFromMessage()
     {
         $message = new Mime\Message();  // No Parts

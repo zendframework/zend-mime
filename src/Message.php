@@ -213,14 +213,21 @@ class Message
      * all the MIME parts set according to the given string
      *
      * @param string $message
-     * @param string $boundary
+     * @param string $boundary Multipart boundary; if omitted, $message will be
+     *                         treated as a single part
      * @param string $EOL EOL string; defaults to {@link Zend\Mime\Mime::LINEEND}
      * @throws Exception\RuntimeException
      * @return \Zend\Mime\Message
      */
-    public static function createFromMessage($message, $boundary, $EOL = Mime::LINEEND)
+    public static function createFromMessage($message, $boundary = null, $EOL = Mime::LINEEND)
     {
-        $parts = Decode::splitMessageStruct($message, $boundary, $EOL);
+        if ($boundary) {
+            $parts = Decode::splitMessageStruct($message, $boundary, $EOL);
+        } else {
+            Decode::splitMessage($message, $headers, $body, $EOL);
+            $parts = [['header' => $headers,
+                       'body'   => $body    ]];
+        }
 
         $res = new static();
         foreach ($parts as $part) {
