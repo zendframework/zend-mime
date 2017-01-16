@@ -6,7 +6,9 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- Nothing.
+- [#22](https://github.com/zendframework/zend-mime/pull/22) adds the ability to
+  decode a single-part MIME message via `Zend\Mime\Message::createFromMessage()`
+  by omitting the `$boundary` argument.
 
 ### Changes
 
