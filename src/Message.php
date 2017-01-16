@@ -38,12 +38,19 @@ class Message
      * Append a new Zend\Mime\Part to the current message
      *
      * @param \Zend\Mime\Part $part
+     * @throws Exception\InvalidArgumentException
      */
     public function addPart(Part $part)
     {
-        /**
-         * @todo check for duplicate object handle
-         */
+        foreach ($this->getParts() as $key => $row) {
+            if ($part == $row) {
+                throw new Exception\InvalidArgumentException(sprintf(
+                    'Provided part %s already defined.',
+                    $part->getId()
+                ));
+            }
+        }
+
         $this->parts[] = $part;
     }
 
