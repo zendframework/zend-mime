@@ -18,7 +18,7 @@
     },
     "require-dev": {
         "zendframework/zend-mail": "^2.6",
-        "phpunit/PHPUnit": "~4.0",
+        "phpunit/PHPUnit": "^4.7 || ^5.7",
         "zendframework/zend-coding-standard": "~1.0.0"
     },
     "suggest": {
