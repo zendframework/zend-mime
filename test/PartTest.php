@@ -26,8 +26,8 @@ class PartTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->testText = 'safdsafsa�lg ��gd�� sd�jg�sdjg�ld�gksd�gj�sdfg�dsj�gjsd�gj�dfsjg�dsfj�djs�g kjhdkj '
-                       . 'fgaskjfdh gksjhgjkdh gjhfsdghdhgksdjhg';
+        $this->testText = 'safdsafsa�lg ��gd�� sd�jg�sdjg�ld�gksd�gj�sdfg�dsj'
+            .'�gjsd�gj�dfsjg�dsfj�djs�g kjhdkj fgaskjfdh gksjhgjkdh gjhfsdghdhgksdjhg';
         $this->part = new Mime\Part($this->testText);
         $this->part->encoding = Mime\Mime::ENCODING_BASE64;
         $this->part->type = "text/plain";

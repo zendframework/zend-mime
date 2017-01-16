@@ -16,12 +16,14 @@ use Zend\Mime;
  */
 class MimeTest extends \PHPUnit_Framework_TestCase
 {
+    // @codingStandardsIgnoreStart
     /**
      * Stores the original set timezone
      *
      * @var string
      */
     private $_originaltimezone;
+    // @codingStandardsIgnoreEnd
 
     /**
      * Setup environment
@@ -52,13 +54,17 @@ class MimeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($m3->boundary(), $myBoundary);
     }
 
+    // @codingStandardsIgnoreStart
     public function testIsPrintable_notPrintable()
     {
+        // @codingStandardsIgnoreEnd
         $this->assertFalse(Mime\Mime::isPrintable('Test with special chars: �����'));
     }
 
+    // @codingStandardsIgnoreStart
     public function testIsPrintable_isPrintable()
     {
+        // @codingStandardsIgnoreEnd
         $this->assertTrue(Mime\Mime::isPrintable('Test without special chars'));
     }
 
@@ -114,10 +120,12 @@ class MimeTest extends \PHPUnit_Framework_TestCase
             ["äöü", "UTF-8", "=?UTF-8?Q?=C3=A4=C3=B6=C3=BC?="],
             ["äöü ", "UTF-8", "=?UTF-8?Q?=C3=A4=C3=B6=C3=BC?="],
             ["Gimme more €", "UTF-8", "=?UTF-8?Q?Gimme=20more=20=E2=82=AC?="],
+            // @codingStandardsIgnoreStart
             ["Alle meine Entchen schwimmen in dem See, schwimmen in dem See, Köpfchen in das Wasser, Schwänzchen in die Höh!", "UTF-8", "=?UTF-8?Q?Alle=20meine=20Entchen=20schwimmen=20in=20dem=20See,=20?=
  =?UTF-8?Q?schwimmen=20in=20dem=20See,=20K=C3=B6pfchen=20in=20das=20?=
  =?UTF-8?Q?Wasser,=20Schw=C3=A4nzchen=20in=20die=20H=C3=B6h!?="],
             ["ääääääääääääääääääääääääääääääääää", "UTF-8", "=?UTF-8?Q?=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4?="],
+            // @codingStandardsIgnoreEnd
             ["A0", "UTF-8", "=?UTF-8?Q?A0?="],
         ];
     }
@@ -135,9 +143,11 @@ class MimeTest extends \PHPUnit_Framework_TestCase
     {
         return [
             ["äöü", "UTF-8", "=?UTF-8?B?w6TDtsO8?="],
+            // @codingStandardsIgnoreStart
             ["Alle meine Entchen schwimmen in dem See, schwimmen in dem See, Köpfchen in das Wasser, Schwänzchen in die Höh!", "UTF-8", "=?UTF-8?B?QWxsZSBtZWluZSBFbnRjaGVuIHNjaHdpbW1lbiBpbiBkZW0gU2VlLCBzY2h3?=
  =?UTF-8?B?aW1tZW4gaW4gZGVtIFNlZSwgS8O2cGZjaGVuIGluIGRhcyBXYXNzZXIsIFNj?=
  =?UTF-8?B?aHfDpG56Y2hlbiBpbiBkaWUgSMO2aCE=?="],
+            // @codingStandardsIgnoreEnd
         ];
     }
 
@@ -158,7 +168,8 @@ class MimeTest extends \PHPUnit_Framework_TestCase
     {
         return [
             ["äöüäöüäöüäöüäöüäöüäöü"],
-            ["Alle meine Entchen schwimmen in dem See, schwimmen in dem See, Köpfchen in das Wasser, Schwänzchen in die Höh!"]
+            ["Alle meine Entchen schwimmen in dem See, schwimmen in dem See, "
+                . "Köpfchen in das Wasser, Schwänzchen in die Höh!"]
         ];
     }
 
@@ -196,8 +207,10 @@ class MimeTest extends \PHPUnit_Framework_TestCase
     {
         return [
             ['äöü', 'quoted-printable', '=C3=A4=C3=B6=C3=BC'],
+            // @codingStandardsIgnoreStart
             ['Alle meine Entchen schwimmen in dem See, schwimmen in dem See, Köpfchen in das Wasser, Schwänzchen in die Höh!', 'quoted-printable', 'Alle meine Entchen schwimmen in dem See, schwimmen in dem See, K=C3=B6pfche=
 n in das Wasser, Schw=C3=A4nzchen in die H=C3=B6h!'],
+            // @codingStandardsIgnoreEnd
             ['foobar', 'base64', 'Zm9vYmFyCg=='],
         ];
     }
@@ -224,7 +237,8 @@ n in das Wasser, Schw=C3=A4nzchen in die H=C3=B6h!'],
      */
     public function testLineLengthInQuotedPrintableHeaderEncoding()
     {
-        $subject = "Alle meine Entchen schwimmen in dem See, schwimmen in dem See, Köpfchen in das Wasser, Schwänzchen in die Höh!";
+        $subject = "Alle meine Entchen schwimmen in dem See, schwimmen in dem See, "
+            . "Köpfchen in das Wasser, Schwänzchen in die Höh!";
         $encoded = Mime\Mime::encodeQuotedPrintableHeader($subject, "UTF-8", 100);
         foreach (explode(Mime\Mime::LINEEND, $encoded) as $line) {
             if (strlen($line) > 100) {
