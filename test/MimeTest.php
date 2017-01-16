@@ -91,6 +91,16 @@ class MimeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $qp);
     }
 
+    public function testQuotedPrintableDoesNotBreakOctets()
+    {
+        $text = str_repeat('a', Mime\Mime::LINELENGTH - 3) . '=.bbb';
+        $qp = Mime\Mime::encodeQuotedPrintable($text);
+
+        $expected = str_repeat('a', Mime\Mime::LINELENGTH - 3) . "=\n=3D.bbb";
+
+        $this->assertEquals($expected, $qp);
+    }
+
     public function testBase64()
     {
         $content = str_repeat("\x88\xAA\xAF\xBF\x29\x88\xAA\xAF\xBF\x29\x88\xAA\xAF", 4);
