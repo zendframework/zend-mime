@@ -126,18 +126,19 @@ class MimeTest extends \PHPUnit_Framework_TestCase
 
     public static function dataTestEncodeMailHeaderQuotedPrintable()
     {
+        // @codingStandardsIgnoreStart
         return [
             ["äöü", "UTF-8", "=?UTF-8?Q?=C3=A4=C3=B6=C3=BC?="],
             ["äöü ", "UTF-8", "=?UTF-8?Q?=C3=A4=C3=B6=C3=BC?="],
             ["Gimme more €", "UTF-8", "=?UTF-8?Q?Gimme=20more=20=E2=82=AC?="],
-            // @codingStandardsIgnoreStart
-            ["Alle meine Entchen schwimmen in dem See, schwimmen in dem See, Köpfchen in das Wasser, Schwänzchen in die Höh!", "UTF-8", "=?UTF-8?Q?Alle=20meine=20Entchen=20schwimmen=20in=20dem=20See,=20?=
- =?UTF-8?Q?schwimmen=20in=20dem=20See,=20K=C3=B6pfchen=20in=20das=20?=
- =?UTF-8?Q?Wasser,=20Schw=C3=A4nzchen=20in=20die=20H=C3=B6h!?="],
+            ["Alle meine Entchen schwimmen in dem See, schwimmen in dem See, Köpfchen in das Wasser, Schwänzchen in die Höh!", "UTF-8", "=?UTF-8?Q?Alle=20meine=20Entchen=20schwimmen=20in=20dem=20See,=20?=\n =?UTF-8?Q?schwimmen=20in=20dem=20See,=20K=C3=B6pfchen=20in=20das=20?=\n =?UTF-8?Q?Wasser,=20Schw=C3=A4nzchen=20in=20die=20H=C3=B6h!?="],
             ["ääääääääääääääääääääääääääääääääää", "UTF-8", "=?UTF-8?Q?=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4?="],
-            // @codingStandardsIgnoreEnd
             ["A0", "UTF-8", "=?UTF-8?Q?A0?="],
+            ["äääääääääääääää ä", "UTF-8", "=?UTF-8?Q?=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=20?=\n =?UTF-8?Q?=C3=A4?="],
+            ["äääääääääääääää äääääääääääääää", "UTF-8", "=?UTF-8?Q?=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=20?=\n =?UTF-8?Q?=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4?="],
+            ["ä äääääääääääääää", "UTF-8", "=?UTF-8?Q?=C3=A4=20=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4=C3=A4?="],
         ];
+        // @codingStandardsIgnoreEnd
     }
 
     /**
