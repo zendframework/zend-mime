@@ -17,7 +17,7 @@ class Message
     /**
      * Returns the list of all Zend\Mime\Part in the message
      *
-     * @return array of \Zend\Mime\Part
+     * @return Part[]
      */
     public function getParts()
     {
