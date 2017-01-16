@@ -36,7 +36,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [#13](https://github.com/zendframework/zend-mime/pull/13) fixes issues with
+  qp-octets produced by Outlook.
 
 ## 2.6.0 - 2016-04-20
 
