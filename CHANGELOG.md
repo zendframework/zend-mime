@@ -46,6 +46,9 @@ All notable changes to this project will be documented in this file, in reverse 
   qp-octets produced by Outlook.
 - [#17](https://github.com/zendframework/zend-mime/pull/17) fixes a syntax error
   in how are thrown by `Zend\Mime\Part::setContent()`.
+- [#18](https://github.com/zendframework/zend-mime/pull/18) fixes how non-ASCII
+  header values are encoded, ensuring that it allows the first word to be of
+  arbitrary length.
 
 ## 2.6.0 - 2016-04-20
 
