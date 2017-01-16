@@ -169,4 +169,14 @@ EOD;
 
         $this->assertEquals('', $mimeMessage->generateMessage());
     }
+
+    public function testDuplicatePartAddedWillThrowException()
+    {
+        $this->setExpectedException(Mime\Exception\InvalidArgumentException::class);
+
+        $message = new Mime\Message();
+        $part    = new Mime\Part('This is a test');
+        $message->addPart($part);
+        $message->addPart($part);
+    }
 }
