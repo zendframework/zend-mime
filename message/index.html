@@ -209,6 +209,11 @@ strings and returning a <code>Zend\Mime\Message</code> instance:</p>
 <pre class="codehilite"><code class="language-php">$message = Zend\Mime\Message::createFromMessage($string, $boundary);</code></pre>
 
 
+<p>As of version 2.6.1, You may also parse a single-part message by omitting the
+<code>$boundary</code> argument:</p>
+<pre class="codehilite"><code class="language-php">$message = Zend\Mime\Message::createFromMessage($string);</code></pre>
+
+
 <h2 id="available-methods">Available methods</h2>
 <p><code>Zend\Mime\Message</code> contains the following methods:</p>
 <ul>
