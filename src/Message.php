@@ -105,7 +105,7 @@ class Message
      */
     public function generateMessage($EOL = Mime::LINEEND)
     {
-        if (!$this->isMultiPart()) {
+        if (! $this->isMultiPart()) {
             if (empty($this->parts)) {
                 return '';
             }
@@ -176,8 +176,10 @@ class Message
      * @throws Exception\RuntimeException
      * @return array
      */
+    // @codingStandardsIgnoreStart
     protected static function _disassembleMime($body, $boundary)
     {
+        // @codingStandardsIgnoreEnd
         $start  = 0;
         $res    = [];
         // find every mime part limiter and cut out the
@@ -193,18 +195,18 @@ class Message
         $start = $p + 3 + strlen($boundary);
 
         while (($p = strpos($body, '--' . $boundary . "\n", $start)) !== false) {
-            $res[] = substr($body, $start, $p-$start);
+            $res[] = substr($body, $start, $p - $start);
             $start = $p + 3 + strlen($boundary);
         }
 
         // no more parts, find end boundary
         $p = strpos($body, '--' . $boundary . '--', $start);
-        if ($p===false) {
+        if ($p === false) {
             throw new Exception\RuntimeException('Not a valid Mime Message: End Missing');
         }
 
         // the remaining part also needs to be parsed:
-        $res[] = substr($body, $start, $p-$start);
+        $res[] = substr($body, $start, $p - $start);
         return $res;
     }
 
