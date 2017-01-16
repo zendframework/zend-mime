@@ -26,6 +26,12 @@ All notable changes to this project will be documented in this file, in reverse 
 
 - Nothing.
 
+### Changes
+
+- [#14](https://github.com/zendframework/zend-mime/pull/14) adds checks for
+  duplicate parts when adding them to a MIME message, and now throws an
+  `InvalidArgumentException` when detected.
+
 ### Deprecated
 
 - Nothing.
