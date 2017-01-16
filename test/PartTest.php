@@ -162,16 +162,37 @@ class PartTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('foobar', $part->getDescription());
     }
 
-    public function testConstructGetInvalidArgumentException()
+    public function invalidContentTypes()
     {
-        $this->setExpectedException('Zend\Mime\Exception\InvalidArgumentException');
-        $part = new Mime\Part(1);
+        return [
+            'null'       => [null],
+            'false'      => [false],
+            'true'       => [true],
+            'zero'       => [0],
+            'int'        => [1],
+            'zero-float' => [0.0],
+            'float'      => [1.1],
+            'array'      => [['string']],
+            'object'     => [(object) ['content' => 'string']],
+        ];
     }
 
-    public function testSetContentGetInvalidArgumentException()
+    /**
+     * @dataProvider invalidContentTypes
+     */
+    public function testConstructorRaisesInvalidArgumentExceptionForInvalidContentTypes($content)
     {
-        $this->setExpectedException('Zend\Mime\Exception\InvalidArgumentException');
+        $this->setExpectedException(Mime\Exception\InvalidArgumentException::class);
+        new Mime\Part($content);
+    }
+
+    /**
+     * @dataProvider invalidContentTypes
+     */
+    public function testSetContentRaisesInvalidArgumentExceptionForInvalidContentTypes($content)
+    {
         $part = new Mime\Part();
-        $part->setContent(1);
+        $this->setExpectedException(Mime\Exception\InvalidArgumentException::class);
+        $part->setContent($content);
     }
 }

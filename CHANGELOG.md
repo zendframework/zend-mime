@@ -44,6 +44,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 - [#13](https://github.com/zendframework/zend-mime/pull/13) fixes issues with
   qp-octets produced by Outlook.
+- [#17](https://github.com/zendframework/zend-mime/pull/17) fixes a syntax error
+  in how are thrown by `Zend\Mime\Part::setContent()`.
 
 ## 2.6.0 - 2016-04-20
 
