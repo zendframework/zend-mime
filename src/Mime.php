@@ -125,6 +125,12 @@ class Mime
                 $ptr = $lineLength;
             }
 
+            // Try to prevent that the first character of a line is a dot
+            // Outlook Bug: http://engineering.como.com/ghost-vs-outlook/
+            while ($ptr > 1 && $ptr < strlen($str) && $str[$ptr] === '.') {
+                --$ptr;
+            }
+
             // Ensure we are not splitting across an encoded character
             $pos = strrpos(substr($str, 0, $ptr), '=');
             if ($pos !== false && $pos >= $ptr - 2) {
@@ -133,12 +139,6 @@ class Mime
 
             // Check if there is a space at the end of the line and rewind
             if ($ptr > 0 && $str[$ptr - 1] == ' ') {
-                --$ptr;
-            }
-
-            // Try to prevent that the first character of a line is a dot
-            // Outlook Bug: http://engineering.como.com/ghost-vs-outlook/
-            while ($ptr > 1 && $ptr < strlen($str) && $str[$ptr] === '.') {
                 --$ptr;
             }
 
