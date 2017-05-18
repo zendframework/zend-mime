@@ -193,7 +193,7 @@ class Mime
         $str = self::_encodeQuotedPrintable($str);
 
         // Mail-Header required chars have to be encoded also:
-        $str = str_replace(['?', ' ', '_'], ['=3F', '=20', '=5F'], $str);
+        $str = str_replace(['?', ',', ' ', '_'], ['=3F', '=2C', '=20', '=5F'], $str);
 
         // initialize first line, we need it anyways
         $lines = [0 => ''];
