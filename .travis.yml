@@ -56,9 +56,6 @@ matrix:
     - php: 7.1
       env:
         - DEPS=latest
-    - php: hhvm
-  allow_failures:
-    - php: hhvm
 
 notifications:
   irc: "irc.freenode.org#zftalk.dev"
