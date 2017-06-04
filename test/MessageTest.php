@@ -194,7 +194,7 @@ EOD;
 
     public function testDuplicatePartAddedWillThrowException()
     {
-        $this->setExpectedException(Mime\Exception\InvalidArgumentException::class);
+        $this->expectException(Mime\Exception\InvalidArgumentException::class);
 
         $message = new Mime\Message();
         $part    = new Mime\Part('This is a test');

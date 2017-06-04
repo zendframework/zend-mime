@@ -183,7 +183,7 @@ class PartTest extends TestCase
      */
     public function testConstructorRaisesInvalidArgumentExceptionForInvalidContentTypes($content)
     {
-        $this->setExpectedException(Mime\Exception\InvalidArgumentException::class);
+        $this->expectException(Mime\Exception\InvalidArgumentException::class);
         new Mime\Part($content);
     }
 
@@ -193,7 +193,7 @@ class PartTest extends TestCase
     public function testSetContentRaisesInvalidArgumentExceptionForInvalidContentTypes($content)
     {
         $part = new Mime\Part();
-        $this->setExpectedException(Mime\Exception\InvalidArgumentException::class);
+        $this->expectException(Mime\Exception\InvalidArgumentException::class);
         $part->setContent($content);
     }
 }
