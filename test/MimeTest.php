@@ -9,12 +9,13 @@
 
 namespace ZendTest\Mime;
 
+use PHPUnit\Framework\TestCase;
 use Zend\Mime;
 
 /**
  * @group      Zend_Mime
  */
-class MimeTest extends \PHPUnit_Framework_TestCase
+class MimeTest extends TestCase
 {
     // @codingStandardsIgnoreStart
     /**

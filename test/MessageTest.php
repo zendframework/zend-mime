@@ -9,12 +9,13 @@
 
 namespace ZendTest\Mime;
 
+use PHPUnit\Framework\TestCase;
 use Zend\Mime;
 
 /**
  * @group      Zend_Mime
  */
-class MessageTest extends \PHPUnit_Framework_TestCase
+class MessageTest extends TestCase
 {
     public function testMultiPart()
     {
