@@ -255,7 +255,7 @@ n in das Wasser, Schw=C3=A4nzchen in die H=C3=B6h!'],
         foreach (explode(Mime\Mime::LINEEND, $encoded) as $line) {
             $this->assertLessThanOrEqual(
                 100,
-                $line,
+                strlen($line),
                 "Line '" . $line . "' is " . strlen($line) . " chars long, only 100 allowed."
             );
         }
@@ -263,7 +263,7 @@ n in das Wasser, Schw=C3=A4nzchen in die H=C3=B6h!'],
         foreach (explode(Mime\Mime::LINEEND, $encoded) as $line) {
             $this->assertLessThanOrEqual(
                 40,
-                $line,
+                strlen($line),
                 "Line '" . $line . "' is " . strlen($line) . " chars long, only 40 allowed."
             );
         }
