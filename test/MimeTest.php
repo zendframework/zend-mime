@@ -253,16 +253,22 @@ n in das Wasser, Schw=C3=A4nzchen in die H=C3=B6h!'],
             . "Köpfchen in das Wasser, Schwänzchen in die Höh!";
         $encoded = Mime\Mime::encodeQuotedPrintableHeader($subject, "UTF-8", 100);
         foreach (explode(Mime\Mime::LINEEND, $encoded) as $line) {
-            if (strlen($line) > 100) {
-                $this->fail("Line '" . $line . "' is " . strlen($line) . " chars long, only 100 allowed.");
-            }
+            $this->assertLessThanOrEqual(
+                100,
+                $line,
+                "Line '" . $line . "' is " . strlen($line) . " chars long, only 100 allowed."
+            );
         }
         $encoded = Mime\Mime::encodeQuotedPrintableHeader($subject, "UTF-8", 40);
         foreach (explode(Mime\Mime::LINEEND, $encoded) as $line) {
-            if (strlen($line) > 40) {
-                $this->fail("Line '" . $line . "' is " . strlen($line) . " chars long, only 40 allowed.");
-            }
+            $this->assertLessThanOrEqual(
+                40,
+                $line,
+                "Line '" . $line . "' is " . strlen($line) . " chars long, only 40 allowed."
+            );
         }
+
+
     }
 
     public function dataTestCharsetDetection()
