@@ -6,7 +6,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- Nothing.
+- [#27](https://github.com/zendframework/zend-mime/pull/27) adds a fluent
+  interface to the various setters in `Zend\Mime\Message`.
 
 ### Deprecated
 
