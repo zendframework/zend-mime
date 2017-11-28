@@ -9,13 +9,14 @@
 
 namespace ZendTest\Mime;
 
+use PHPUnit\Framework\TestCase;
 use Zend\Mime;
 use Zend\Mime\Message;
 
 /**
  * @group      Zend_Mime
  */
-class MessageTest extends \PHPUnit_Framework_TestCase
+class MessageTest extends TestCase
 {
     public function testMultiPart()
     {
@@ -194,7 +195,7 @@ EOD;
 
     public function testDuplicatePartAddedWillThrowException()
     {
-        $this->setExpectedException(Mime\Exception\InvalidArgumentException::class);
+        $this->expectException(Mime\Exception\InvalidArgumentException::class);
 
         $message = new Mime\Message();
         $part    = new Mime\Part('This is a test');
