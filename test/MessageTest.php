@@ -10,6 +10,7 @@
 namespace ZendTest\Mime;
 
 use Zend\Mime;
+use Zend\Mime\Message;
 
 /**
  * @group      Zend_Mime
@@ -199,5 +200,26 @@ EOD;
         $part    = new Mime\Part('This is a test');
         $message->addPart($part);
         $message->addPart($part);
+    }
+
+    public function testFromStringWithCrlfAndRfc2822FoldedHeaders()
+    {
+        // This is a fixture as provided by many mailservers
+        // e.g. cyrus or dovecot
+        $eol = "\r\n";
+        $fixture = 'This is a MIME-encapsulated message' . $eol . $eol
+                 . '--=_af4357ef34b786aae1491b0a2d14399f' . $eol
+                 . 'Content-Type: text/plain' . $eol
+                 . 'Content-Disposition: attachment;' . $eol
+                 . "\t" . 'filename="test.txt"' . $eol // Valid folding
+                 . $eol
+                 . 'This is a test' . $eol
+                 . '--=_af4357ef34b786aae1491b0a2d14399f--';
+
+        $message = Message::createFromMessage($fixture, '=_af4357ef34b786aae1491b0a2d14399f', $eol);
+        $parts = $message->getParts();
+
+        $this->assertEquals(1, count($parts));
+        $this->assertEquals('attachment; filename="test.txt"', $parts[0]->getDisposition());
     }
 }
