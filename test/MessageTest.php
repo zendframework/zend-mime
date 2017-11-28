@@ -208,13 +208,13 @@ EOD;
         // e.g. cyrus or dovecot
         $eol = "\r\n";
         $fixture = 'This is a MIME-encapsulated message' . $eol . $eol
-                 . '--=_af4357ef34b786aae1491b0a2d14399f' . $eol
-                 . 'Content-Type: text/plain' . $eol
-                 . 'Content-Disposition: attachment;' . $eol
-                 . "\t" . 'filename="test.txt"' . $eol // Valid folding
-                 . $eol
-                 . 'This is a test' . $eol
-                 . '--=_af4357ef34b786aae1491b0a2d14399f--';
+            . '--=_af4357ef34b786aae1491b0a2d14399f' . $eol
+            . 'Content-Type: text/plain' . $eol
+            . 'Content-Disposition: attachment;' . $eol
+            . "\t" . 'filename="test.txt"' . $eol // Valid folding
+            . $eol
+            . 'This is a test' . $eol
+            . '--=_af4357ef34b786aae1491b0a2d14399f--';
 
         $message = Message::createFromMessage($fixture, '=_af4357ef34b786aae1491b0a2d14399f', $eol);
         $parts = $message->getParts();
