@@ -28,10 +28,12 @@ class Message
      * Sets the given array of Zend\Mime\Part as the array for the message
      *
      * @param array $parts
+     * @return self
      */
     public function setParts($parts)
     {
         $this->parts = $parts;
+        return $this;
     }
 
     /**
@@ -39,6 +41,7 @@ class Message
      *
      * @param \Zend\Mime\Part $part
      * @throws Exception\InvalidArgumentException
+     * @return self
      */
     public function addPart(Part $part)
     {
@@ -52,6 +55,7 @@ class Message
         }
 
         $this->parts[] = $part;
+        return $this;
     }
 
     /**
@@ -72,10 +76,12 @@ class Message
      * Zend\Mime for generating the boundary.
      *
      * @param \Zend\Mime\Mime $mime
+     * @return self
      */
     public function setMime(Mime $mime)
     {
         $this->mime = $mime;
+        return $this;
     }
 
     /**
