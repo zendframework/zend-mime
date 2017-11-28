@@ -122,16 +122,23 @@ class Decode
             }
         }
 
+        // @todo splitMime removes "\r" sequences, which breaks valid mime
+        // messages as returned by many mail servers
+        $headersEOL = $EOL;
+
         // find an empty line between headers and body
         // default is set new line
+        // @todo Maybe this is too much "magic"; we should be more strict here
         if (strpos($message, $EOL . $EOL)) {
             list($headers, $body) = explode($EOL . $EOL, $message, 2);
         // next is the standard new line
         } elseif ($EOL != "\r\n" && strpos($message, "\r\n\r\n")) {
             list($headers, $body) = explode("\r\n\r\n", $message, 2);
+            $headersEOL = "\r\n"; // Headers::fromString will fail with incorrect EOL
         // next is the other "standard" new line
         } elseif ($EOL != "\n" && strpos($message, "\n\n")) {
             list($headers, $body) = explode("\n\n", $message, 2);
+            $headersEOL = "\n";
         // at last resort find anything that looks like a new line
         } else {
             ErrorHandler::start(E_NOTICE | E_WARNING);
@@ -139,7 +146,7 @@ class Decode
             ErrorHandler::stop();
         }
 
-        $headers = Headers::fromString($headers, $EOL);
+        $headers = Headers::fromString($headers, $headersEOL);
     }
 
     /**

@@ -36,7 +36,9 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [#30](https://github.com/zendframework/zend-mime/pull/30) fixes how EOL
+  characters are detected, to ensure that mail using `\r\n` as an EOL sequence
+  (including mail emitted by Cyrus and Dovecot) will be properly parsed.
 
 ## 2.6.1 - 2017-01-16
 
