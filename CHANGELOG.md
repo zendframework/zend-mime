@@ -9,13 +9,20 @@ All notable changes to this project will be documented in this file, in reverse 
 - [#27](https://github.com/zendframework/zend-mime/pull/27) adds a fluent
   interface to the various setters in `Zend\Mime\Message`.
 
+- [#28](https://github.com/zendframework/zend-mime/pull/28) adds support for PHP
+  versions 7.1 and 7.2.
+
 ### Deprecated
 
 - Nothing.
 
 ### Removed
 
-- Nothing.
+- [#28](https://github.com/zendframework/zend-mime/pull/28) removes support for
+  PHP 5.5.
+
+- [#28](https://github.com/zendframework/zend-mime/pull/28) removes support for
+  HHVM.
 
 ### Fixed
 
