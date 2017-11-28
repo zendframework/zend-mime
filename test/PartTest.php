@@ -9,12 +9,13 @@
 
 namespace ZendTest\Mime;
 
+use PHPUnit\Framework\TestCase;
 use Zend\Mime;
 
 /**
  * @group      Zend_Mime
  */
-class PartTest extends \PHPUnit_Framework_TestCase
+class PartTest extends TestCase
 {
     /**
      * MIME part test object
@@ -182,7 +183,7 @@ class PartTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructorRaisesInvalidArgumentExceptionForInvalidContentTypes($content)
     {
-        $this->setExpectedException(Mime\Exception\InvalidArgumentException::class);
+        $this->expectException(Mime\Exception\InvalidArgumentException::class);
         new Mime\Part($content);
     }
 
@@ -192,7 +193,7 @@ class PartTest extends \PHPUnit_Framework_TestCase
     public function testSetContentRaisesInvalidArgumentExceptionForInvalidContentTypes($content)
     {
         $part = new Mime\Part();
-        $this->setExpectedException(Mime\Exception\InvalidArgumentException::class);
+        $this->expectException(Mime\Exception\InvalidArgumentException::class);
         $part->setContent($content);
     }
 }
