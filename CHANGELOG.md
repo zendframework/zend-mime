@@ -18,6 +18,10 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
+- [#26](https://github.com/zendframework/zend-mime/pull/26) ensures commas
+  included within list data items are ASCII encoded, ensuring that the items
+  will split on commas correctly (instead of splitting within an item).
+
 - [#30](https://github.com/zendframework/zend-mime/pull/30) fixes how EOL
   characters are detected, to ensure that mail using `\r\n` as an EOL sequence
   (including mail emitted by Cyrus and Dovecot) will be properly parsed.
