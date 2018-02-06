@@ -125,21 +125,28 @@ class Mime
                 $ptr = $lineLength;
             }
 
-            // Try to prevent that the first character of a line is a dot
-            // Outlook Bug: http://engineering.como.com/ghost-vs-outlook/
-            while ($ptr > 1 && $ptr < strlen($str) && $str[$ptr] === '.') {
-                --$ptr;
-            }
-
             // Ensure we are not splitting across an encoded character
             $pos = strrpos(substr($str, 0, $ptr), '=');
             if ($pos !== false && $pos >= $ptr - 2) {
                 $ptr = $pos;
             }
 
-            // Check if there is a space at the end of the line and rewind
-            if ($ptr > 0 && $str[$ptr - 1] == ' ') {
-                --$ptr;
+            switch (ord($str[0])) {
+                case 0x2E:
+                    $str  = '=2E' . substr($str, 1);
+                    $ptr += 2;
+                    break;
+            }
+
+            switch (ord(substr($str, $ptr - 1))) {
+                case 0x09:
+                    $str  = substr_replace($str, '=09', $ptr - 1, 1);
+                    $ptr += 2;
+                    break;
+                case 0x20:
+                    $str  = substr_replace($str, '=20', $ptr - 1, 1);
+                    $ptr += 2;
+                    break;
             }
 
             // Add string and continue
