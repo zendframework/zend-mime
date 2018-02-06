@@ -92,6 +92,16 @@ class MimeTest extends TestCase
         $this->assertEquals($expected, $qp);
     }
 
+    public function testQuotedPrintableSpacesAndDots()
+    {
+        $text = str_repeat(' ', Mime\Mime::LINELENGTH) . str_repeat('.', Mime\Mime::LINELENGTH);
+        $qp = Mime\Mime::encodeQuotedPrintable($text);
+
+        $expected = str_repeat(' ', Mime\Mime::LINELENGTH - 2) . "=\n  " . str_repeat('.', Mime\Mime::LINELENGTH - 2) . "=\n..";
+
+        $this->assertEquals($expected, $qp);
+    }
+
     public function testQuotedPrintableDoesNotBreakOctets()
     {
         $text = str_repeat('a', Mime\Mime::LINELENGTH - 3) . '=.bbb';
