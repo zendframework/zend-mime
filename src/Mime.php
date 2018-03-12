@@ -131,19 +131,18 @@ class Mime
                 $ptr = $pos;
             }
 
-            switch (ord($str[0])) {
-                case 0x2E:
-                    $str  = '=2E' . substr($str, 1);
-                    $ptr += 2;
-                    break;
+            if (ord($str[0]) == 0x2E) {
+                $str  = '=2E' . substr($str, 1);
+                $ptr += 2;
             }
 
+            // copied from swiftmailer https://git.io/vAXU1
             switch (ord(substr($str, $ptr - 1))) {
-                case 0x09:
+                case 0x09: // Horizontal Tab
                     $str  = substr_replace($str, '=09', $ptr - 1, 1);
                     $ptr += 2;
                     break;
-                case 0x20:
+                case 0x20: // Space
                     $str  = substr_replace($str, '=20', $ptr - 1, 1);
                     $ptr += 2;
                     break;
