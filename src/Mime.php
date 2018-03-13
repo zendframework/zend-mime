@@ -131,7 +131,7 @@ class Mime
                 $ptr = $pos;
             }
 
-            if (ord($str[0]) == 0x2E) {
+            if (ord($str[0]) == 0x2E) { // 0x2E is a dot
                 $str  = '=2E' . substr($str, 1);
                 $ptr += 2;
             }
