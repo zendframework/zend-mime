@@ -24,7 +24,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 - Nothing.
 
-## 2.7.1 - TBD
+## 2.7.1 - 2018-05-14
 
 ### Added
 
@@ -44,7 +44,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [#32](https://github.com/zendframework/zend-mime/pull/32) corrects a potential infinite loop when parsing lines consisting of only spaces and dots.
 
 ## 2.7.0 - 2017-11-28
 
