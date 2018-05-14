@@ -267,8 +267,6 @@ n in das Wasser, Schw=C3=A4nzchen in die H=C3=B6h!'],
                 "Line '" . $line . "' is " . strlen($line) . " chars long, only 40 allowed."
             );
         }
-
-
     }
 
     public function dataTestCharsetDetection()
