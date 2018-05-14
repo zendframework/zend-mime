@@ -3,7 +3,7 @@
         {
             "location": "/",
             "text": "zend-mime\n\n\n\n\n\n\nZend\\Mime\n is a support class for handling multipart MIME messages. It is used\nby \nZend\\Mail\n and \nZend\\Mime\\Message\n and may be used by applications requiring\nMIME support.\n\n\n\n\nFile issues at https://github.com/zendframework/zend-mime/issues\n\n\nDocumentation is at https://docs.zendframework.com/zend-mime/",
-            "title": "Home"
+            "title": "zend-mime"
         },
         {
             "location": "/#zend-mime",
