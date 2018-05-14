@@ -97,7 +97,9 @@ class MimeTest extends TestCase
         $text = str_repeat(' ', Mime\Mime::LINELENGTH) . str_repeat('.', Mime\Mime::LINELENGTH);
         $qp = Mime\Mime::encodeQuotedPrintable($text);
 
-        $expected = str_repeat(' ', Mime\Mime::LINELENGTH - 1) . "=20=\n=2E" . str_repeat('.', Mime\Mime::LINELENGTH - 1);
+        $expected = str_repeat(' ', Mime\Mime::LINELENGTH - 1)
+            . "=20=\n=2E"
+            . str_repeat('.', Mime\Mime::LINELENGTH - 1);
 
         $this->assertEquals($expected, $qp);
     }
