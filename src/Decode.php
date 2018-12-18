@@ -108,7 +108,7 @@ class Decode
         $firstlinePos = strpos($message, "\n");
         $firstline = $firstlinePos === false ? $message : substr($message, 0, $firstlinePos);
         if (! preg_match('%^[^\s]+[^:]*:%', $firstline)) {
-            $headers = [];
+            $headers = new Headers();
             // TODO: we're ignoring \r for now - is this function fast enough and is it safe to assume noone needs \r?
             $body = str_replace(["\r", "\n"], ['', $EOL], $message);
             return;
