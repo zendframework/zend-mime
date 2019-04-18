@@ -7,11 +7,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="zend-mime">  
-    <link rel="shortcut icon" href="../img/favicon.ico">
+    <link rel="shortcut icon" href="//img/favicon.ico">
 
-    <title>Intro - zend-mime - Zend Framework Docs</title>
+    <title>zend-mime - Zend Framework Docs</title>
 
-    <link rel="stylesheet" href="../css/styles-f3b53f5ceb.css">
+    <link rel="stylesheet" href="//css/styles-f3b53f5ceb.css">
 </head>
 <body id="page-top">
 
@@ -31,7 +31,7 @@
             
             <span class="navbar-brand">
                 <a class="logo-link" href="https://framework.zend.com/" data-tooltip data-placement="bottom" title="Go to the ZF homepage">
-                    <img src="../img/zend-framework-logo.svg" height="28" alt="Zend Framework">
+                    <img src="//img/zend-framework-logo.svg" height="28" alt="Zend Framework">
                 </a>
             </span>
         </div>
@@ -66,7 +66,7 @@
                     
     <div class="subnavigation hidden-print">
         <h4 class="subnavigation__title">
-            <a href="..">zend-mime</a>
+            <a href="/.">zend-mime</a>
         </h4>
 
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
@@ -75,13 +75,13 @@
             
                 
                     <li class="subnavigation__list-item ">
-                        <a href=".." class="subnavigation__link">zend-mime</a>
+                        <a href="/." class="subnavigation__link">zend-mime</a>
                     </li>
                 
             
                 
-                    <li class="subnavigation__list-item subnavigation__list-item--active">
-                        <a href="./" class="subnavigation__link">Intro</a>
+                    <li class="subnavigation__list-item ">
+                        <a href="/intro/" class="subnavigation__link">Intro</a>
                     </li>
                 
             
@@ -92,13 +92,13 @@
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../message/" class="subnavigation__link">Messages</a>
+        <a href="/message/" class="subnavigation__link">Messages</a>
     </li>
 
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../part/" class="subnavigation__link">Parts</a>
+        <a href="/part/" class="subnavigation__link">Parts</a>
     </li>
 
                             
@@ -175,133 +175,18 @@
             <div class="col-md-9 col-xs-12 content" role="main">
             <!-- content:begin -->
                 
-                    <ol class="breadcrumb" role="navigation" aria-label="breadcrumbs navigation">
-    <li><a href="https://framework.zend.com/">Home</a></li>
 
-    
-        <li><a href="https://docs.zendframework.com/">Documentation</a></li>
+<h1 class="content__title">404</h1>
+<blockquote>
+    <h3>Something went wrong!</h3>
+    <p>
+        We're sorry, but the page you are looking for does not exist.
+    </p>
+</blockquote>
 
-        
-            <li><a href="..">zend-mime</a></li>
-
-            
-
-            <li class="active">Intro</li>
-        
-    
-</ol>
+<a href="/" class="btn btn-default" role="button">Go to homepage</a>
 
 
-    
-
-    
-    
-
-    
-    
-        <div class="toc">
-            <h6 class="toc__headline">In This Article</h6>
-            <ul class="toc__list">
-                
-                    <li class="toc__entry">
-                        <a href="#static-methods-and-constants" class="toc__link">Static Methods and Constants</a>
-                    </li>
-                
-                    <li class="toc__entry">
-                        <a href="#instantiating-zend92mime" class="toc__link">Instantiating Zend\Mime</a>
-                    </li>
-                
-            </ul>
-        </div>
-    
-
-
-    <h1 id="introduction">Introduction</h1>
-<p><code>Zend\Mime\Mime</code> is a support class for handling multipart
-<a href="https://en.wikipedia.org/wiki/MIME">MIME</a> messages;
-<a href="https://github.com/zendframework/zend-mail">zend-mail</a> relies on it for both
-parsing and creating multipart messages. <a href="../message/"><code>Zend\Mime\Message</code></a> can
-also be consumed by applications requiring general MIME support.</p>
-<h2 id="static-methods-and-constants">Static Methods and Constants</h2>
-<p><code>Zend\Mime\Mime</code> provides a set of static helper methods to work with MIME:</p>
-<ul>
-<li><code>Zend\Mime\Mime::isPrintable()</code>: Returns <code>TRUE</code> if the given string contains
-  no unprintable characters, <code>FALSE</code> otherwise.</li>
-<li><code>Zend\Mime\Mime::encode()</code>: Encodes a string with the specified encoding.</li>
-<li><code>Zend\Mime\Mime::encodeBase64()</code>: Encodes a string into base64 encoding.</li>
-<li><code>Zend\Mime\Mime::encodeQuotedPrintable()</code>: Encodes a string with the
-  quoted-printable mechanism.</li>
-<li><code>Zend\Mime\Mime::encodeBase64Header()</code>: Encodes a string into base64 encoding
-  for Mail Headers.</li>
-<li><code>Zend\Mime\Mime::encodeQuotedPrintableHeader()</code>: Encodes a string with the
-  quoted-printable mechanism for Mail Headers.</li>
-<li><code>Zend\Mime\Mime::mimeDetectCharset()</code>: detects if a string is encoded as
-  ASCII, Base64, or quoted-printable.</li>
-</ul>
-<p><code>Zend\Mime\Mime</code> defines a set of constants commonly used with MIME messages:</p>
-<ul>
-<li><code>Zend\Mime\Mime::TYPE_OCTETSTREAM</code>: 'application/octet-stream'</li>
-<li><code>Zend\Mime\Mime::TYPE_TEXT</code>: 'text/plain'</li>
-<li><code>Zend\Mime\Mime::TYPE_HTML</code>: 'text/html'</li>
-<li><code>Zend\Mime\Mime::ENCODING_7BIT</code>: '7bit'</li>
-<li><code>Zend\Mime\Mime::ENCODING_8BIT</code>: '8bit'</li>
-<li><code>Zend\Mime\Mime::ENCODING_QUOTEDPRINTABLE</code>: 'quoted-printable'</li>
-<li><code>Zend\Mime\Mime::ENCODING_BASE64</code>: 'base64'</li>
-<li><code>Zend\Mime\Mime::DISPOSITION_ATTACHMENT</code>: 'attachment'</li>
-<li><code>Zend\Mime\Mime::DISPOSITION_INLINE</code>: 'inline'</li>
-<li><code>Zend\Mime\Mime::MULTIPART_ALTERNATIVE</code>: 'multipart/alternative'</li>
-<li><code>Zend\Mime\Mime::MULTIPART_MIXED</code>: 'multipart/mixed'</li>
-<li><code>Zend\Mime\Mime::MULTIPART_RELATED</code>: 'multipart/related'</li>
-</ul>
-<h2 id="instantiating-zend92mime">Instantiating Zend\Mime</h2>
-<p>When instantiating a <code>Zend\Mime\Mime</code> object, a MIME boundary is stored that is
-used for all instance calls. If the constructor is called with a string
-parameter, this value is used as the MIME boundary; if not, a random MIME
-boundary is generated.</p>
-<p>A <code>Zend\Mime\Mime</code> object has the following methods:</p>
-<ul>
-<li><code>boundary()</code>: Returns the MIME boundary string.</li>
-<li><code>boundaryLine()</code>: Returns the complete MIME boundary line.</li>
-<li><code>mimeEnd()</code>: Returns the complete MIME end boundary line.</li>
-</ul>
-
-
-
-    <nav>
-    <ul class="page-nav hidden-print">
-
-        
-        <li class="page-nav__item">
-            
-                <a rel="prev" class="page-nav__link page-nav__link--prev" href="..">
-                    <i class="fa fa-chevron-left"></i> Previous
-                </a>
-            
-        </li>
-
-        
-        <li class="page-nav__item">
-            
-                <a rel="next" class="page-nav__link page-nav__link--next" href="../message/">
-                    Next <i class="fa fa-chevron-right"></i>
-                </a>
-            
-        </li>
-    </ul>
-</nav>
-
-
-
-    <div class="help-wanted">
-        <p>
-            Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/zendframework/zend-mime/edit/master/docs/book/intro.md" target="_blank" class="help-wanted__link">
-                Edit this page on GitHub!
-            </a>
-        </p>
-    </div>
-
-                
             <!-- content:end -->
             </div>
             <div class="col-md-3 col-xs-12 sidebar">
@@ -317,7 +202,7 @@ boundary is generated.</p>
                     
     <div class="subnavigation hidden-print">
         <h4 class="subnavigation__title">
-            <a href="..">zend-mime</a>
+            <a href="/.">zend-mime</a>
         </h4>
 
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
@@ -326,13 +211,13 @@ boundary is generated.</p>
             
                 
                     <li class="subnavigation__list-item ">
-                        <a href=".." class="subnavigation__link">zend-mime</a>
+                        <a href="/." class="subnavigation__link">zend-mime</a>
                     </li>
                 
             
                 
-                    <li class="subnavigation__list-item subnavigation__list-item--active">
-                        <a href="./" class="subnavigation__link">Intro</a>
+                    <li class="subnavigation__list-item ">
+                        <a href="/intro/" class="subnavigation__link">Intro</a>
                     </li>
                 
             
@@ -343,13 +228,13 @@ boundary is generated.</p>
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../message/" class="subnavigation__link">Messages</a>
+        <a href="/message/" class="subnavigation__link">Messages</a>
     </li>
 
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../part/" class="subnavigation__link">Parts</a>
+        <a href="/part/" class="subnavigation__link">Parts</a>
     </li>
 
                             
@@ -428,11 +313,11 @@ boundary is generated.</p>
 </footer>
 
     <script>
-        var base_url = '..',
+        var base_url = '/',
             siteName = 'zend-mime';
     </script>
-    <script src="../js/scripts-8d7ae56abf.js"></script>
-        <script src="../search/main.js"></script>
+    <script src="//js/scripts-8d7ae56abf.js"></script>
+        <script src="/search/main.js"></script>
 
     
     <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
