@@ -301,12 +301,10 @@ the behaviour of the <code>Mime</code> instance used by <code>Message</code>, yo
 <h2 id="parsing-a-string-to-create-a-zend92mime92message-object">Parsing a string to create a Zend\Mime\Message object</h2>
 <p><code>Zend\Mime\Message</code> defines a static factory for parsing MIME-compliant message
 strings and returning a <code>Zend\Mime\Message</code> instance:</p>
-<pre class="codehilite"><code class="language-php">$message = Zend\Mime\Message::createFromMessage($string, $boundary);</code></pre>
-
+<p> <pre class=codehilite><code class=language-php>$message = Zend\Mime\Message::createFromMessage($string, $boundary);</code></pre></p>
 <p>As of version 2.6.1, You may also parse a single-part message by omitting the
 <code>$boundary</code> argument:</p>
-<pre class="codehilite"><code class="language-php">$message = Zend\Mime\Message::createFromMessage($string);</code></pre>
-
+<p> <pre class=codehilite><code class=language-php>$message = Zend\Mime\Message::createFromMessage($string);</code></pre></p>
 <h2 id="available-methods">Available methods</h2>
 <p><code>Zend\Mime\Message</code> contains the following methods:</p>
 <ul>
@@ -360,7 +358,7 @@ strings and returning a <code>Zend\Mime\Message</code> instance:</p>
     <div class="help-wanted">
         <p>
             Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/zendframework/zend-mime/edit/master/docs/message.md" target="_blank" class="help-wanted__link">
+            <a href="https://github.com/zendframework/zend-mime/edit/master/docs/book/message.md" target="_blank" class="help-wanted__link">
                 Edit this page on GitHub!
             </a>
         </p>

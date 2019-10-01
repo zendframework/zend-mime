@@ -275,7 +275,7 @@ instances to assemble a complete multipart message.</p>
 content. The type is assumed to be OCTET-STREAM, with an 8-bit encoding. After
 instantiating a <code>Zend\Mime\Part</code>, meta information can be set directly on its
 attributes:</p>
-<pre class="codehilite"><code class="language-php">public $type = Zend\Mime\Mime::TYPE_OCTETSTREAM;
+<p> <pre class=codehilite><code class=language-php>public $type = Zend\Mime\Mime::TYPE_OCTETSTREAM;
 public $encoding = Zend\Mime\Mime::ENCODING_8BIT;
 public $id;
 public $disposition;
@@ -284,8 +284,7 @@ public $description;
 public $charset;
 public $boundary;
 public $location;
-public $language;</code></pre>
-
+public $language;</code></pre></p>
 <h2 id="methods-for-rendering-the-message-part-to-a-string">Methods for rendering the message part to a string</h2>
 <p><code>getContent()</code> returns the encoded content of the <code>Zend\Mime\Part</code> as a string
 using the encoding specified in the attribute <code>$encoding</code>. Valid values are
@@ -350,7 +349,7 @@ need to be set correctly before this method is called.</p>
     <div class="help-wanted">
         <p>
             Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/zendframework/zend-mime/edit/master/docs/part.md" target="_blank" class="help-wanted__link">
+            <a href="https://github.com/zendframework/zend-mime/edit/master/docs/book/part.md" target="_blank" class="help-wanted__link">
                 Edit this page on GitHub!
             </a>
         </p>

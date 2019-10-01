@@ -2,22 +2,22 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
      <loc>https://docs.zendframework.com/zend-mime/</loc>
-     <lastmod>2019-08-08</lastmod>
+     <lastmod>2019-10-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://docs.zendframework.com/zend-mime/intro/</loc>
-     <lastmod>2019-08-08</lastmod>
+     <lastmod>2019-10-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://docs.zendframework.com/zend-mime/message/</loc>
-     <lastmod>2019-08-08</lastmod>
+     <lastmod>2019-10-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://docs.zendframework.com/zend-mime/part/</loc>
-     <lastmod>2019-08-08</lastmod>
+     <lastmod>2019-10-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
 </urlset>
