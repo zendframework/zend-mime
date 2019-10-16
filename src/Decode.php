@@ -78,8 +78,10 @@ class Decode
         $body    = null; // "Declare" variable before the first usage "for reading"
         foreach ($parts as $part) {
             static::splitMessage($part, $headers, $body, $EOL);
-            $result[] = ['header' => $headers,
-                              'body'   => $body    ];
+            $result[] = [
+                'header' => $headers,
+                'body'   => $body,
+            ];
         }
         return $result;
     }
@@ -94,7 +96,7 @@ class Decode
      * @param  Headers         $headers output param, headers container
      * @param  string          $body    output param, content of message
      * @param  string          $EOL EOL string; defaults to {@link Zend\Mime\Mime::LINEEND}
-     * @param  bool         $strict  enable strict mode for parsing message
+     * @param  bool            $strict  enable strict mode for parsing message
      * @return null
      */
     public static function splitMessage($message, &$headers, &$body, $EOL = Mime::LINEEND, $strict = false)
