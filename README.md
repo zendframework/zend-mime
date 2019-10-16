@@ -7,6 +7,20 @@
 by `Zend\Mail` and `Zend\Mime\Message` and may be used by applications requiring
 MIME support.
 
+## Installation
 
-- File issues at https://github.com/zendframework/zend-mime/issues
-- Documentation is at https://docs.zendframework.com/zend-mime/
+Run the following to install this library:
+
+```bash
+$ composer require zendframework/zend-mime
+```
+
+## Documentation
+
+Browse the documentation online at https://docs.zendframework.com/zend-mime/
+
+## Support
+
+* [Issues](https://github.com/zendframework/zend-mime/issues/)
+* [Chat](https://zendframework-slack.herokuapp.com/)
+* [Forum](https://discourse.zendframework.com/)

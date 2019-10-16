@@ -1,10 +1,8 @@
 <?php
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/zendframework/zend-mime for the canonical source repository
+ * @copyright Copyright (c) 2005-2019 Zend Technologies USA Inc. (https://www.zend.com)
+ * @license   https://github.com/zendframework/zend-mime/blob/master/LICENSE.md New BSD License
  */
 
 namespace Zend\Mime;
@@ -80,8 +78,10 @@ class Decode
         $body    = null; // "Declare" variable before the first usage "for reading"
         foreach ($parts as $part) {
             static::splitMessage($part, $headers, $body, $EOL);
-            $result[] = ['header' => $headers,
-                              'body'   => $body    ];
+            $result[] = [
+                'header' => $headers,
+                'body'   => $body,
+            ];
         }
         return $result;
     }
@@ -96,7 +96,7 @@ class Decode
      * @param  Headers         $headers output param, headers container
      * @param  string          $body    output param, content of message
      * @param  string          $EOL EOL string; defaults to {@link Zend\Mime\Mime::LINEEND}
-     * @param  bool         $strict  enable strict mode for parsing message
+     * @param  bool            $strict  enable strict mode for parsing message
      * @return null
      */
     public static function splitMessage($message, &$headers, &$body, $EOL = Mime::LINEEND, $strict = false)
