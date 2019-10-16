@@ -12,7 +12,7 @@
         "issues": "https://github.com/zendframework/zend-mime/issues",
         "source": "https://github.com/zendframework/zend-mime",
         "rss": "https://github.com/zendframework/zend-mime/releases.atom",
-        "slack": "https://zendframework-slack.herokuapp.com",
+        "chat": "https://zendframework-slack.herokuapp.com",
         "forum": "https://discourse.zendframework.com/c/questions/components"
     },
     "require": {
@@ -42,8 +42,8 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "2.7-dev",
-            "dev-develop": "2.8-dev"
+            "dev-master": "2.7.x-dev",
+            "dev-develop": "2.8.x-dev"
         }
     },
     "scripts": {
@@ -55,6 +55,5 @@
         "cs-fix": "phpcbf",
         "test": "phpunit --colors=always",
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
-    },
-    "homepage": "https://github.com/zendframework/zend-mime"
+    }
 }
