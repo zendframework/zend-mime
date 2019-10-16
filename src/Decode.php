@@ -72,7 +72,7 @@ class Decode
     public static function splitMessageStruct($message, $boundary, $EOL = Mime::LINEEND)
     {
         $parts = static::splitMime($message, $boundary);
-        if (count($parts) <= 0) {
+        if (! $parts) {
             return;
         }
         $result = [];
