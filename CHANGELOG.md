@@ -44,7 +44,10 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [#36](https://github.com/zendframework/zend-mime/pull/36) fixes
+  `Zend\Mime\Decode::splitMessage` to set `Zend\Mail\Headers`
+  instance always for `$headers` parameter. Before, when messages
+  without headers was provided, `$headers` was an empty array.
 
 ## 2.7.1 - 2018-05-14
 
