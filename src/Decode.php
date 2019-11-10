@@ -17,8 +17,8 @@ class Decode
      *
      * Parts consist of the header and the body of each MIME part.
      *
-     * @param string $body raw body of message
-     * @param string $boundary boundary as found in content-type
+     * @param  string $body     raw body of message
+     * @param  string $boundary boundary as found in content-type
      * @return array parts with content of each part, empty if no parts found
      * @throws Exception\RuntimeException
      */
@@ -61,26 +61,26 @@ class Decode
      * decodes a mime encoded String and returns a
      * struct of parts with header and body
      *
-     * @param string $message raw message content
-     * @param string $boundary boundary as found in content-type
-     * @param string $EOL EOL string; defaults to {@link Zend\Mime\Mime::LINEEND}
+     * @param  string $message  raw message content
+     * @param  string $boundary boundary as found in content-type
+     * @param  string $EOL EOL string; defaults to {@link Zend\Mime\Mime::LINEEND}
      * @return array|null parts as array('header' => array(name => value), 'body' => content), null if no parts found
      * @throws Exception\RuntimeException
      */
     public static function splitMessageStruct($message, $boundary, $EOL = Mime::LINEEND)
     {
         $parts = static::splitMime($message, $boundary);
-        if (!$parts) {
+        if (! $parts) {
             return;
         }
         $result = [];
         $headers = null; // "Declare" variable before the first usage "for reading"
-        $body = null; // "Declare" variable before the first usage "for reading"
+        $body    = null; // "Declare" variable before the first usage "for reading"
         foreach ($parts as $part) {
             static::splitMessage($part, $headers, $body, $EOL);
             $result[] = [
                 'header' => $headers,
-                'body' => $body,
+                'body'   => $body,
             ];
         }
         return $result;
@@ -92,11 +92,11 @@ class Decode
      *
      * The charset of the returned headers depend on your iconv settings.
      *
-     * @param string|Headers $message raw message with header and optional content
-     * @param Headers $headers output param, headers container
-     * @param string $body output param, content of message
-     * @param string $EOL EOL string; defaults to {@link Zend\Mime\Mime::LINEEND}
-     * @param bool $strict enable strict mode for parsing message
+     * @param  string|Headers  $message raw message with header and optional content
+     * @param  Headers         $headers output param, headers container
+     * @param  string          $body    output param, content of message
+     * @param  string          $EOL EOL string; defaults to {@link Zend\Mime\Mime::LINEEND}
+     * @param  bool            $strict  enable strict mode for parsing message
      * @return null
      */
     public static function splitMessage($message, &$headers, &$body, $EOL = Mime::LINEEND, $strict = false)
@@ -107,7 +107,7 @@ class Decode
         // check for valid header at first line
         $firstlinePos = strpos($message, "\n");
         $firstline = $firstlinePos === false ? $message : substr($message, 0, $firstlinePos);
-        if (!preg_match('%^[^\s]+[^:]*:%', $firstline)) {
+        if (! preg_match('%^[^\s]+[^:]*:%', $firstline)) {
             $headers = new Headers();
             // TODO: we're ignoring \r for now - is this function fast enough and is it safe to assume noone needs \r?
             $body = str_replace(["\r", "\n"], ['', $EOL], $message);
@@ -115,7 +115,7 @@ class Decode
         }
 
         // see @ZF2-372, pops the first line off a message if it doesn't contain a header
-        if (!$strict) {
+        if (! $strict) {
             $parts = explode(':', $firstline, 2);
             if (count($parts) != 2) {
                 $message = substr($message, strpos($message, $EOL) + 1);
@@ -152,8 +152,8 @@ class Decode
     /**
      * split a content type in its different parts
      *
-     * @param string $type content-type
-     * @param string $wantedPart the wanted part, else an array with all parts is returned
+     * @param  string $type       content-type
+     * @param  string $wantedPart the wanted part, else an array with all parts is returned
      * @return string|array wanted part or all parts as array('type' => content-type, partname => value)
      */
     public static function splitContentType($type, $wantedPart = null)
@@ -164,9 +164,9 @@ class Decode
     /**
      * split a header field like content type in its different parts
      *
-     * @param string $field header field
-     * @param string $wantedPart the wanted part, else an array with all parts is returned
-     * @param string $firstName key name for the first part
+     * @param  string $field      header field
+     * @param  string $wantedPart the wanted part, else an array with all parts is returned
+     * @param  string $firstName  key name for the first part
      * @return string|array wanted part or all parts as array($firstName => firstPart, partname => value)
      * @throws Exception\RuntimeException
      */
@@ -187,10 +187,8 @@ class Decode
         }
 
         $field = $firstName . '=' . $field;
-        if (!preg_match_all('%([^=\s]+)\s*=\s*("[^"]+"|[^;]+)(;\s*|$)%', $field, $matches)) {
-            throw new Exception\InvalidArgumentException(
-                sprintf('Not a valid header: %s', $field)
-            );
+        if (! preg_match_all('%([^=\s]+)\s*=\s*("[^"]+"|[^;]+)(;\s*|$)%', $field, $matches)) {
+            throw new Exception\RuntimeException('not a valid header field');
         }
 
         if ($wantedPart) {
@@ -224,13 +222,14 @@ class Decode
      *
      * The charset of the returned string depends on your iconv settings.
      *
-     * @param string $string encoded string
+     * @param  string $string encoded string
      * @return string decoded string
      */
     public static function decodeQuotedPrintable($string)
     {
         return iconv_mime_decode($string, ICONV_MIME_DECODE_CONTINUE_ON_ERROR, 'UTF-8');
     }
+
 
     /**
      * @param string $str
