@@ -131,15 +131,15 @@ class Decode
         // @todo Maybe this is too much "magic"; we should be more strict here
         if (strpos($message, $EOL . $EOL)) {
             list($headers, $body) = explode($EOL . $EOL, $message, 2);
-            // next is the standard new line
+        // next is the standard new line
         } elseif ($EOL != "\r\n" && strpos($message, "\r\n\r\n")) {
             list($headers, $body) = explode("\r\n\r\n", $message, 2);
             $headersEOL = "\r\n"; // Headers::fromString will fail with incorrect EOL
-            // next is the other "standard" new line
+        // next is the other "standard" new line
         } elseif ($EOL != "\n" && strpos($message, "\n\n")) {
             list($headers, $body) = explode("\n\n", $message, 2);
             $headersEOL = "\n";
-            // at last resort find anything that looks like a new line
+        // at last resort find anything that looks like a new line
         } else {
             ErrorHandler::start(E_NOTICE | E_WARNING);
             list($headers, $body) = preg_split("%([\r\n]+)\\1%U", $message, 2);
