@@ -10,6 +10,8 @@ namespace ZendTest\Mime;
 use PHPUnit\Framework\TestCase;
 use Zend\Mail\Headers;
 use Zend\Mime\Decode;
+use Zend\Mail\Storage\Message;
+use Zend\Mime\Exception\InvalidArgumentException;
 
 class DecodeTest extends TestCase
 {
@@ -21,5 +23,30 @@ class DecodeTest extends TestCase
 
         self::assertInstanceOf(Headers::class, $headers);
         self::assertSame($text, $body);
+    }
+
+    public function testSplitHeaderField()
+    {
+        $example = <<<EOD
+From: "Ozan Akman <ozan-akman@example.com>
+To: "Mary Smith" <mary@x.test>
+CC: John Doe <jdoe@machine.example>, <boss@nil.test>
+Date: Tue, 1 Jul 2003 10:52:37 +0200
+Message-ID: <5678.21-Nov-1997@example.com>
+
+Hi everyone, this is a test.
+EOD;
+        $message = new Message(['raw' => $example]);
+
+        // Test single
+        self::assertEquals('Mary Smith <mary@x.test>', $message->getHeaderField('To'));
+
+        // Test multiple
+        self::assertEquals("John Doe <jdoe@machine.example>,\r\n boss@nil.test", $message->getHeaderField('Cc'));
+
+        // Test malformed address
+        self::expectException(InvalidArgumentException::class);
+        $message->getHeaderField('From');
+
     }
 }
