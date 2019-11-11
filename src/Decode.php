@@ -242,7 +242,7 @@ class Decode
             return false;
         }
 
-        $matchCount = preg_match('/"/', $str, $matches);
+        $matchCount = substr_count($str, $characterToCheck);
 
         if (!$matchCount) {
             return false;
