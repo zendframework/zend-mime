@@ -1,5 +1,9 @@
 # zend-mime
 
+> ## Repository abandoned 2019-12-31
+>
+> This repository has moved to laminas/laminas-mime.
+
 [![Build Status](https://secure.travis-ci.org/zendframework/zend-mime.svg?branch=master)](https://secure.travis-ci.org/zendframework/zend-mime)
 [![Coverage Status](https://coveralls.io/repos/github/zendframework/zend-mime/badge.svg?branch=master)](https://coveralls.io/github/zendframework/zend-mime?branch=master)
 
