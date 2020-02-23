@@ -178,7 +178,12 @@ class Decode
         // special case - a bit optimized
         if ($firstName === $wantedPart) {
             $field = strtok($field, ';');
-            return $field[0] == '"' ? substr($field, 1, -1) : $field;
+
+            if (self::isQuotedString($field)) {
+                return substr($field, 1, -1);
+            }
+
+            return $field;
         }
 
         $field = $firstName . '=' . $field;
@@ -191,7 +196,7 @@ class Decode
                 if (strcasecmp($name, $wantedPart)) {
                     continue;
                 }
-                if ($matches[2][$key][0] != '"') {
+                if (!self::isQuotedString($matches[2][$key])) {
                     return $matches[2][$key];
                 }
                 return substr($matches[2][$key], 1, -1);
@@ -202,7 +207,7 @@ class Decode
         $split = [];
         foreach ($matches[1] as $key => $name) {
             $name = strtolower($name);
-            if ($matches[2][$key][0] == '"') {
+            if (self::isQuotedString($matches[2][$key])) {
                 $split[$name] = substr($matches[2][$key], 1, -1);
             } else {
                 $split[$name] = $matches[2][$key];
@@ -223,5 +228,41 @@ class Decode
     public static function decodeQuotedPrintable($string)
     {
         return iconv_mime_decode($string, ICONV_MIME_DECODE_CONTINUE_ON_ERROR, 'UTF-8');
+    }
+
+
+    /**
+     * @param string $str
+     * @param string $characterToCheck
+     * @return bool
+     */
+    private static function isQuotedString($str, $characterToCheck = '"')
+    {
+        if (empty($str) || !is_string($str)) {
+            return false;
+        }
+
+        $matchCount = substr_count($str, $characterToCheck);
+
+        if (!$matchCount) {
+            return false;
+        }
+
+        // The string is containing only one quote,
+        // which means it's not a valid value and not parsed correctly.
+        if ($matchCount === 1) {
+            throw new Exception\InvalidArgumentException(
+                sprintf('Malformed header value: %s', $str)
+            );
+        }
+
+        $firstCharacter = $str[0];
+        $lastCharacter = substr($str, -1);
+
+        if ($firstCharacter === $characterToCheck && $lastCharacter === $characterToCheck) {
+            return true;
+        }
+
+        return false;
     }
 }
